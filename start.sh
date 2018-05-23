@@ -9,7 +9,7 @@ template_file='nginx/symfony.conf.dist'
 envsubst "\${PROJECT_HOST_NAME}" < ${template_file} > ${config_file}
 docker-compose build
 docker-compose up -d
-docker-compose exec php bash -c "composer install"
+docker-compose exec php bash -c "composer install --no-interaction"
 
 docker-compose exec php bash -c "chown -R www-data:www-data var/"
 
