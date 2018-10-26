@@ -13,6 +13,13 @@ services:
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         ports:
             - ${MYSQL_HOST_PORT}:3306
+    redis:
+        build:
+            context: redis
+            args:
+                TIMEZONE: ${TIMEZONE}
+        ports:
+            - 16379:6379
     php:
         build:
             context: php7-fpm
@@ -29,6 +36,17 @@ services:
             - php
         volumes:
             - ./logs/nginx/:/var/log/nginx
+    socketio:
+        build:
+            context: socketio
+            args:
+                TIMEZONE: ${TIMEZONE}
+        ports:
+            - 10081:8080
+        volumes_from:
+            - php
+        volumes:
+            - ./socketapp/:/srv/socketapp/
 #    elk:
 #        image: willdurand/elk
 #        ports:
