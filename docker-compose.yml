@@ -47,6 +47,14 @@ services:
             - php
         volumes:
             - ./socketapp/:/srv/socketapp/
+    wowza:
+        image: wowzamedia/wowza-streaming-engine-linux
+        ports:
+            - 10082:8088
+            - 10083:1935
+        entrypoint: /sbin/entrypoint.sh
+        volumes:
+            - ./examples/:/var/examples/
 #    elk:
 #        image: willdurand/elk
 #        ports:
